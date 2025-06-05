@@ -1,0 +1,19 @@
+<%= form_with url: editors_path, method: :post, local: true do %>
+  <div class="mb-4">
+    <label for="code" class="block text-gray-700 font-bold mb-2">技術検証エディタ</label>
+    <%= text_area_tag :code, params[:code], rows: 15, class: "w-full p-4 bg-black text-white font-mono rounded-md" %>
+  </div>
+
+  <div class="mb-4 flex justify-end">
+    <%= submit_tag "実行", class: "bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" %>
+  </div>
+<% end %>
+
+<% if @result %>
+  <div class="mt-6">
+    <label class="block text-gray-700 font-bold mb-2">出力欄</label>
+    <div class="bg-black text-white p-4 rounded-md font-mono whitespace-pre-wrap">
+      <%= @result %>
+    </div>
+  </div>
+<% end %>
