@@ -1,0 +1,22 @@
+version: '3.9'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: bash -c "bundle install && rm -f tmp/pids/server.pid && ./bin/rails server -b 0.0.0.0 -p 3000"
+    tty: true
+    stdin_open: true
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/judge0_test_app
+      - node_modules:/judge0_test_app/node_modules
+    environment:
+      TZ: Asia/Tokyo
+
+volumes:
+  bundle_data:
+  postgresql_data:
+  node_modules:
