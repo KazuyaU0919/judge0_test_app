@@ -1,19 +1,25 @@
-<%= form_with url: editors_path, method: :post, local: true do %>
-  <div class="mb-4">
-    <label for="code" class="block text-gray-700 font-bold mb-2">技術検証エディタ</label>
-    <%= text_area_tag :code, params[:code], rows: 15, class: "w-full p-4 bg-black text-white font-mono rounded-md" %>
-  </div>
+<!-- 全体を中央寄せ＆縦並び -->
+<div class="w-screen flex flex-col items-center py-8">
 
-  <div class="mb-4 flex justify-end">
-    <%= submit_tag "実行", class: "bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" %>
-  </div>
-<% end %>
+  <!-- 入力欄と実行ボタン -->
+  <%= form_with url: editors_path, method: :post, local: true, data: { turbo: false } do %>
+    <!-- 入力欄 -->
+    <div class="mb-6">
+      <label for="code" class="block text-gray-700 font-bold mb-2">技術検証エディタ</label>
+      <%= text_area_tag :code, params[:code], rows: 15, class: "w-[800px] bg-black text-white font-mono p-4 rounded-md resize-none" %>
+    </div>
 
-<% if @result %>
+    <!-- 実行ボタン -->
+    <div class="mb-6">
+      <%= submit_tag "実行", class: "bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" %>
+    </div>
+  <% end %>
+
+  <!-- 出力欄 -->
   <div class="mt-6">
     <label class="block text-gray-700 font-bold mb-2">出力欄</label>
-    <div class="bg-black text-white p-4 rounded-md font-mono whitespace-pre-wrap">
-      <%= @result %>
+    <div class="bg-black text-white p-4 rounded-md font-mono whitespace-pre-wrap min-h-[200px] w-[800px]">
+      <%= @result.presence || "表示する内容がありません" %>
     </div>
   </div>
-<% end %>
+</div>
