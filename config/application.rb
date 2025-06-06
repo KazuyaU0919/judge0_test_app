@@ -18,6 +18,8 @@ require "action_cable/engine"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+Dotenv::Railtie.load if defined?(Dotenv::Railtie)
+
 module Judge0TestApp
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
