@@ -19,19 +19,14 @@ class EditorsController < ApplicationController
 
     # APIにPOST送信してレスポンスを取得
     response = HTTParty.post(
-      "https://ce.judge0.com/submissions?base64_encoded=false&wait=true",
+      "https://judge0-ce.p.rapidapi.com/submissions?base64_encoded=false&wait=true&fields=*",
       headers: {
         "Content-Type" => "application/json",
         "X-RapidAPI-Key" => ENV["RAPIDAPI_KEY"],
-        "X-RapidAPI-Host" => "judge0-ce.p.rapidapi.com"
+        "X-RapidAPI-Host" => ENV["RAPIDAPI_HOST"]
       },
       body: payload.to_json
     )
-
-    puts "status: #{response.code}"
-    puts "body: #{response.body.inspect}"
-    puts "payload: #{payload.to_json}"
-    puts "APIキー：#{ENV['RAPIDAPI_KEY'].present? ? '取得OK' : '取得失敗'}"
 
     # 出力結果をレスポンスから取り出す（stdout）
     if response.body.present?
